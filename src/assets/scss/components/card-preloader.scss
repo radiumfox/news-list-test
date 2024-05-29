@@ -1,7 +1,7 @@
 .card-preloader {
   $this: &;
-  height: 554px;
   width: 536px;
+  height: 680px;
   box-sizing: border-box;
   display: flex;
   flex-direction: column;
@@ -21,7 +21,6 @@
   &__img {
     height: 250px;
     min-height: 250px;
-    background: $bg-banner;
     border-top-right-radius: 16px;
     border-top-left-radius: 16px;
   }
@@ -29,45 +28,18 @@
   &__date {
     height: 36px;
     width: 110px;
-    background: $bg-banner;
   }
 
   &__text {
     height: 120px;
-    background: $bg-banner;
   }
 
   &__tag {
     width: 88px;
     height: 28px;
-    background: $bg-banner;
   }
 
   .preloading {
-    position: relative;
-    overflow: hidden;
-
-    &::before {
-      content: '';
-      position: absolute;
-      height: 100%;
-      width: 100%;
-      background: linear-gradient(90deg, transparent, white 50%, transparent 100%),
-        linear-gradient($bg-banner 100px, transparent 0),
-        linear-gradient($bg-banner 16px, transparent 0),
-        linear-gradient($bg-banner 50px, transparent 0);
-      animation: preloading 1s linear infinite;
-    }
-  }
-
-  @keyframes preloading {
-    0% {
-      left: 0;
-      transform: translateX(-100%);
-    }
-    100% {
-      left: 100%;
-      transform: translateX(0%);
-    }
+    @include preloader;
   }
 }

@@ -1,6 +1,6 @@
 <script setup lang="ts">
-import HeaderElement from './Header.vue'
-import FooterElement from './Footer.vue'
+import HeaderElement from '@/layouts/Header.vue'
+import FooterElement from '@/layouts/Footer.vue'
 
 const props = defineProps({
   title: {

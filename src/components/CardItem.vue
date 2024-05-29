@@ -1,7 +1,7 @@
 <script setup lang="ts">
-import { PropType } from 'vue'
+import { PropType, ref } from 'vue'
 import { DateItem } from '@/ts/types'
-import Tag from './Tag.vue'
+import Tag from '@/components/Tag.vue'
 
 const props = defineProps({
   imgSrc: {
@@ -33,11 +33,22 @@ const props = defineProps({
     default: ''
   }
 })
+
+const imageLoaded = ref(false)
+
+const img = new Image()
+
+img.onload = () => {
+  imageLoaded.value = true
+}
+
+img.src = props.imgSrc
 </script>
 <template>
   <a :class="['card-item', { 'card-item--img': props.imgSrc }]" :href="props.href" target="_self">
     <div v-if="props.imgSrc" class="card-item__img-container">
-      <img class="card-item__img" :src="props.imgSrc" width="536" height="250" />
+      <div v-if="!imageLoaded" class="card-item__img-preloader"></div>
+      <img v-else class="card-item__img" :src="props.imgSrc" width="536" height="250" />
     </div>
 
     <div class="card-item__content">
