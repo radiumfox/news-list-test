@@ -1,46 +1,42 @@
 <script setup lang="ts">
 import axios from 'axios'
-import { ref, reactive, watch, onMounted, computed } from 'vue'
+import { ref, reactive, onMounted } from 'vue'
 import { NewsListProvider } from '@/ts/news-list.provider'
 import { NewsListService } from '@/ts/news-list.service'
 import CardItem from '@/components/CardItem.vue'
 import CardPreloader from '@/components/CardPreloader.vue'
 import ButtonBase from '@/components/ButtonBase.vue'
-import HeaderElement from '@/layouts/Header.vue'
 import PageLayout from '@/layouts/PageLayout.vue'
 
-let $NewsListProvider = reactive({})
+let $NewsListProvider = reactive(new NewsListProvider([], {}))
+
 const showButtonMore = ref(false)
 const newsLoading = ref(true)
 const buttonLoading = ref(false)
 
-onMounted(() => {
-  NewsListService.fetchNews()
+const fetchNews = (page: number = 1) => {
+  buttonLoading.value = true
+
+  NewsListService.fetchNews(page)
     .then((data) => {
-      $NewsListProvider = new NewsListProvider(data.items, data.nav)
+      $NewsListProvider.list = data.items
+      $NewsListProvider.nav = data.nav
+
       showButtonMore.value = $NewsListProvider.canLoadMore
     })
     .finally((res) => {
       newsLoading.value = false
-    })
-})
-
-const loadMorePages = () => {
-  buttonLoading.value = true
-  NewsListService.fetchNews($NewsListProvider.nav.current + 1)
-    .then((data) => {
-      $NewsListProvider.list = data.items
-      $NewsListProvider.nav = data.nav
-      showButtonMore.value = $NewsListProvider.canLoadMore
-    })
-    .finally((res) => {
       buttonLoading.value = false
     })
 }
+
+onMounted(() => {
+  fetchNews()
+})
 </script>
 
 <template>
-  <PageLayout title="Новости" banner-src="../assets/images/banner-img.jpg">
+  <PageLayout title="Новости">
     <template #content>
       <div v-if="newsLoading" class="cards-list">
         <CardPreloader />
@@ -62,7 +58,7 @@ const loadMorePages = () => {
         </div>
         <div class="button-more-container">
           <ButtonBase
-            @click="loadMorePages()"
+            @click="fetchNews($NewsListProvider.nav.current + 1)"
             v-if="showButtonMore"
             text="Загрузить еще"
             :loading="buttonLoading"

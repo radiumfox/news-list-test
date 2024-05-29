@@ -24,8 +24,12 @@ export class NewsListProvider {
     return this._nav
   }
 
-  public set nav(val) {
+  set nav(val: NavDTO) {
     this._nav = val
+  }
+
+  public get canLoadMore() {
+    return this.nav.current < this.nav.total
   }
 
   private formatList(list: NewsItemDTO[]) {
@@ -44,9 +48,5 @@ export class NewsListProvider {
       day: momentObj.date(),
       monthYear: momentObj.format('MMMM YYYY')
     }
-  }
-
-  public get canLoadMore() {
-    return this.nav.current < this.nav.total
   }
 }
