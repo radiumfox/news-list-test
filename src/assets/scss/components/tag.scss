@@ -1,0 +1,12 @@
+.tag {
+  border-radius: 360px;
+  width: fit-content;
+  background: $bg-light;
+  padding: 4px 16px;
+
+  &__text {
+    color: $link-dark-default;
+    font-size: 14px;
+    line-height: 140%;
+  }
+}

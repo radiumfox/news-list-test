@@ -1,0 +1,33 @@
+@import url('https://fonts.googleapis.com/css2?family=Nunito+Sans:ital,opsz,wght@0,6..12,200..1000;1,6..12,200..1000&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Nunito+Sans:ital,opsz,wght@0,6..12,200..1000;1,6..12,200..1000&family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap');
+@import './colors';
+@import './components/import';
+@import './layouts';
+
+.cards-list {
+  display: grid;
+  grid-template-columns: repeat(3, 536px);
+  row-gap: 48px;
+  column-gap: 48px;
+  @include main-layout;
+
+  @media (max-width: 1720px) {
+    grid-template-columns: repeat(2, 536px);
+  }
+
+  @media (max-width: 1130px) {
+    grid-template-columns: 536px;
+  }
+}
+
+.button-more-container {
+  margin-top: 72px;
+  width: 100%;
+  display: flex;
+  justify-content: center;
+}
+
+body {
+  font-family: 'Nunito Sans', sans-serif;
+  margin: 0;
+}

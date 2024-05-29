@@ -1,0 +1,75 @@
+.card-item {
+  $this: &;
+  width: 536px;
+  border: 1px solid $card-border;
+  border-radius: 16px;
+  box-sizing: border-box;
+  display: flex;
+  flex-direction: column;
+  text-decoration: none;
+
+  &--img {
+    padding: 0;
+    border: none;
+
+    #{$this}__content {
+      border: 1px solid $card-border;
+      border-bottom-left-radius: 16px;
+      border-bottom-right-radius: 16px;
+      border-top: 0;
+    }
+  }
+
+  &__content {
+    padding: 32px;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+  }
+
+  &__title {
+    color: $link-default;
+    font-size: 22px;
+    line-height: 120%;
+    margin: 0 0 16px;
+  }
+
+  &__text {
+    color: $grey-3;
+    font-size: 20px;
+    line-height: 130%;
+    margin: 0 0 40px;
+  }
+
+  &__img-container {
+    width: 100%;
+    height: 250px;
+    position: relative;
+    z-index: 1;
+  }
+
+  &__img {
+    border-top-right-radius: 16px;
+    border-top-left-radius: 16px;
+  }
+
+  &__date {
+    display: flex;
+    color: $grey-1;
+    margin-bottom: 16px;
+    line-height: 110%;
+  }
+
+  &__day {
+    font-size: 36px;
+    line-height: 100%;
+    margin-right: 4px;
+  }
+
+  &__month-year {
+    width: min-content;
+    display: inline-block;
+    vertical-align: middle;
+  }
+}
