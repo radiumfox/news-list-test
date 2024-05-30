@@ -2,14 +2,12 @@ import { NewsItemDTO, DateItem, NewsItem, NavDTO } from './types'
 import moment from 'moment'
 
 export class NewsListProvider {
-  private rawNews: NewsItemDTO[]
   private _nav: NavDTO
   private _list: NewsItem[]
 
-  constructor(rawNews: NewsItemDTO[], nav: NavDTO) {
-    this.rawNews = rawNews
-    this._nav = nav
-    this._list = this.formatList(this.rawNews)
+  constructor() {
+    this._nav = { current: 0, total: 0 }
+    this._list = []
   }
 
   public get list(): NewsItem[] {
@@ -28,11 +26,11 @@ export class NewsListProvider {
     this._nav = val
   }
 
-  public get canLoadMore() {
-    return this.nav.current < this.nav.total
+  public get isLastPage() {
+    return this.nav.current >= this.nav.total
   }
 
-  private formatList(list: NewsItemDTO[]) {
+  private formatList(list: NewsItemDTO[]): NewsItem[] {
     return list.map((item: NewsItemDTO) => {
       return {
         ...item,
