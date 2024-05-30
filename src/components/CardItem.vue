@@ -58,8 +58,8 @@ img.src = props.imgSrc
           <span class="card-item__month-year">{{ props.date.monthYear }}</span>
         </div>
 
-        <h2 class="card-item__title">{{ props.title }}</h2>
-        <p class="card-item__text">{{ props.text }}</p>
+        <h2 class="card-item__title" v-html="props.title"></h2>
+        <p class="card-item__text" v-html="props.text"></p>
       </div>
 
       <div class="card-item__tags">
