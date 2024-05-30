@@ -1,5 +1,4 @@
 <script setup lang="ts">
-import axios from 'axios'
 import { ref, reactive, onMounted } from 'vue'
 import { NewsListProvider } from '@/ts/news-list.provider'
 import { NewsListService } from '@/ts/news-list.service'
